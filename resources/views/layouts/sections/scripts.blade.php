@@ -16,3 +16,32 @@
 <!-- BEGIN: Page JS-->
 @yield('page-script')
 <!-- END: Page JS-->
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $(document).on('click', '.logout', function (event) {
+
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to logout?",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "/userlogout",
+                    type: "get",
+                    success: function (result) {
+                        window.location.href = "/login";
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
